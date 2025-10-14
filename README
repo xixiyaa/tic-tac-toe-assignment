@@ -1,0 +1,70 @@
+# Tic Tac Toe - Dear ImGui Edition
+
+## Author
+**[Xifan Luo]**  
+CMPM 123 Assignment 2
+Platform: **Windows 10**  
+IDE: **Visual Studio 2022**  
+Build System: **CMake**
+
+---
+
+## 🧩 Overview
+
+This project implements a complete **Tic Tac Toe** game using **Dear ImGui** for the user interface.  
+It supports both:
+- **Two-player local mode** (Player 1 = X, Player 2 = O)
+- **Single-player mode against AI** (Player 1 = X, AI = O)
+
+The project fulfills all rubric requirements:
+
+| Criteria | Description | Status |
+|-----------|--------------|---------|
+| Program builds successfully | CMake + Visual Studio build confirmed | ✅ |
+| Game allows turn-by-turn play | X and O alternate properly | ✅ |
+| Detects all win/draw conditions | Checks rows, columns, and diagonals | ✅ |
+| Allows reset (cleans memory) | Reset button clears all state | ✅ |
+| Code readability and comments | Fully documented with header comments | ✅ |
+| Extra Credit | Simple AI opponent implemented | ✅ |
+
+---
+
+## 🧠 Implementation Summary
+
+All gameplay logic is contained in **`Application.cpp`**, using static variables for state (no dynamic memory).  
+Key systems:
+
+- **Game Board:** `std::array<int, 9>` for 3×3 grid (0 = empty, 1 = X, 2 = O)
+- **Turn System:** Alternates automatically after each valid move
+- **Win Detection:** Checks all 8 winning line combinations
+- **Draw Check:** Declares draw when all 9 cells are filled
+- **Reset:** Clears game state, resets flags and turn
+- **Memory Cleanup:** No heap allocation; `StopGame()` calls `ResetGame()` for safety
+- **AI Behavior:**
+  1. Try to win if possible  
+  2. Block opponent’s winning move  
+  3. Choose a random empty spot otherwise
+
+---
+
+## ⚙️ Build Instructions
+
+### 🪟 Platform
+- **Operating System:** Windows 10
+- **CMake Version:** 3.10 or higher
+- **Compiler:** MSVC (Visual Studio 17 2022)
+
+### 🧱 Step-by-Step Build Commands
+
+In **PowerShell or CMD**, run the following from your project root folder:
+
+```bash
+# Step 1: Generate Visual Studio project files
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+# Step 2: Build in Release mode
+cmake --build build --config Release
+
+✅ After building, your executable will be located at:
+
+build/Release/demo.exe
